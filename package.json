@@ -1,0 +1,11 @@
+{
+  "name": "ale-q10089-windows-repro",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "verify": "node verification/verify.mjs"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

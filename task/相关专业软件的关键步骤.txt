@@ -1,0 +1,7 @@
+1. 在Node.js中读取mail目录、delivery_log.csv、existing_suppression.csv和bounce_policy.json，建立发送记录与策略索引。
+2. 按Content-Type中的boundary拆分multipart/report，展开折行头并定位message/delivery-status段。
+3. 根据Content-Transfer-Encoding解码base64或quoted-printable内容，提取Original-Message-ID、Final-Recipient、Action、Status和Diagnostic-Code。
+4. 用策略文件中的duplicate_key去重，并把缺少必需字段或无法关联发送记录的邮件写入bounce_exceptions.csv。
+5. 按status_rules生成抑制增量或重投计划，使用Date计算X-Received-At加delay_seconds后的UTC时刻。
+6. 从前三类业务结果聚合domain_summary.csv，把完成版模块复制为parse_bounces.mjs并按稳定主键写出CSV。
+7. 在input_data目录执行npm run process:bounces，检查Node.js退出状态、交付路径和输入文件是否保持不变。

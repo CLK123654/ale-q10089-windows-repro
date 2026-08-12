@@ -1,0 +1,9 @@
+营销邮件在多个收件域的退信率突然上升。发送策略负责人准备审核下一批发布，需要先查清哪些地址应进入抑制名单，哪些发送可以延后重投，避免无效投递继续消耗通道信誉和重试配额。
+
+输入数据包内的mail目录保存脱敏的multipart/report邮件，data/delivery_log.csv记录发送尝试，data/existing_suppression.csv是当前抑制名单，rules/bounce_policy.json规定DSN字段、重复键、状态分类、抑制范围和重投延迟。README.md说明各文件用途，package.json提供process:bounces入口。请使用Node.js完成starter/parse_bounces.mjs，并保留run函数供入口调用。
+
+解析每封邮件的MIME边界和message/delivery-status段，取得Original-Message-ID、Final-Recipient、Action、Status及Diagnostic-Code，同时正确处理quoted-printable和base64内容。退信要能关联到发送记录。缺少Status、找不到message_id或命中重复键的邮件进入异常分流，不参与抑制、重投和域级汇总。
+
+按bounce_policy.json的状态前缀区分永久退信与暂时退信。永久退信生成recipient或domain范围的新增抑制项，已有同范围、同值、同原因的记录不重复输出。暂时退信以X-Received-At为起点计算计划时间，下一次尝试号在原attempt_no上加1。domain_summary.csv从有效退信、实际新增抑制项和重投计划汇总，不另设人工统计口径。
+
+交付src/parse_bounces.mjs，以及reports目录下的parsed_bounces.csv、suppression_updates.csv、retry_plan.csv、bounce_exceptions.csv和domain_summary.csv。CSV表头与输入说明约定一致，业务行按主键稳定排列。在input_data目录执行npm run process:bounces应能重新生成全部交付物，输入邮件、发送记录、现有抑制名单和策略文件保持不变。

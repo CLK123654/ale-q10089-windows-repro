@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "result": "PASS",
+  "task_asset_id": "node_dsn_delivery_disposition",
+  "humanizer_zh_score": 47,
+  "online_ai_detection_used_as_conclusion": false,
+  "public_repository_privacy_scan": "PASS",
+  "local_business_execution_used_as_evidence": false
+}

@@ -1,0 +1,7 @@
+核对退信邮件、发送记录、现有抑制名单和处理策略中的关联字段与时间口径。
+拆分multipart/report结构，读取message/delivery-status字段并解码正文内容。
+用Original-Message-ID关联发送尝试，按策略中的组合键识别重复退信。
+根据Status前缀判定永久与暂时退信，把缺字段和无发送记录的邮件留在异常分流中。
+结合现有名单生成recipient或domain范围的抑制增量，避免重复写入已生效记录。
+使用X-Received-At、重投延迟和原attempt_no计算暂时退信的下次发送安排。
+从有效退信、抑制增量和重投计划汇总各收件域的处置结果。

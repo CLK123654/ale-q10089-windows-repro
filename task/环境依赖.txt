@@ -1,0 +1,5 @@
+本任务支持64位Windows11、macOS和Linux。主软件为Node.js24LTS，使用Node.js进程执行MIME分段、字符解码、CSV关联、UTC时间计算和交付生成；只查看邮件文本或手工编辑报表不能替代运行时处理。
+
+任务不依赖第三方npm包。辅助工具为PowerShell、Windows终端或系统终端，只用于解压、进入input_data并运行npm run process:bounces。软件安装可以联网，正式处理不连接SMTP服务或其它外部系统。Node.js采用公开发行版许可，输入均为脱敏演练材料，不需要业务账号或密钥。
+
+建议使用2核CPU、4GB内存和200MB可写磁盘，无需GPU。执行账户权限需要覆盖mail、data、rules和starter的读取，以及在input_data下创建output；单次运行超时30秒。本题特有风险是把正文内容误当DSN字段、遗漏折行头、混淆base64与quoted-printable，以及从发送时间而非退信接收时间计算重投计划。
