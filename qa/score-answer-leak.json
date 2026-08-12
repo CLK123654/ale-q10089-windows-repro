@@ -1,0 +1,14 @@
+{
+  "gate": "candidate_score_answer_leak_scan",
+  "source": "评分表.txt",
+  "rules": [
+    "sample_id_mapping",
+    "complete_decision_set",
+    "fixed_row_or_summary_count",
+    "ordered_answer_values",
+    "exact_sample_timestamp",
+    "sample_email_answer"
+  ],
+  "hits": [],
+  "pass": true
+}

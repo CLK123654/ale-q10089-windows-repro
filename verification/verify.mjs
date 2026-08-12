@@ -164,6 +164,20 @@ assert(JSON.stringify(workbookSheets(path.join(artifactRoot, '关键标准答案
 assert(JSON.stringify(workbookSheets(path.join(artifactRoot, '任务规格转化.xlsx'))) === JSON.stringify(['任务规格转化']), '任务规格Sheet错误');
 const solutionText = parseZip(path.join(artifactRoot, 'reference.zip')).get('src/parse_bounces.mjs').toString('utf8');
 assert(!/\bB00[1-9]\b|https?:\/\/|node:net|node:http|fetch\s*\(/u.test(solutionText), '完成版模块含样本ID硬编码或外部网络调用');
+const staticReview = JSON.parse(fs.readFileSync(path.join(repoRoot, 'qa', 'static-review.json'), 'utf8'));
+const scoreAnswerLeak = JSON.parse(fs.readFileSync(path.join(repoRoot, 'qa', 'score-answer-leak.json'), 'utf8'));
+const candidateScore = fs.readFileSync(path.join(repoRoot, 'task', '评分表.txt'), 'utf8');
+const scoreLeakPatterns = [
+  /\b(?:B|M)\d{3,}\b/giu,
+  /(?:有效退信集合|异常集合|永久退信集合|暂时退信集合|完整结果集合|完整通过集合|完整拒绝集合)/giu,
+  /(?:固定行数|固定汇总数|总计为|总数为|恰好|共计).{0,8}\d+|\d+封(?:邮件|退信)|\d+条(?:记录|异常|抑制|重投)|\d+个(?:域|结果)/giu,
+  /(?:依次为|分别为|整组|逐项为).{0,100}(?:；|,|，).{0,20}(?:；|,|，)/giu,
+  /\b20\d{2}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z\b/giu,
+  /\b[A-Za-z0-9._%+-]+@(?:commerce|media|app|ops|unknown)\.test\b/giu,
+];
+const currentScoreLeakHits = scoreLeakPatterns.flatMap((pattern) => [...candidateScore.matchAll(pattern)].map((match) => match[0]));
+assert(staticReview.result === 'PASS' && staticReview.task_spec_column_count === 2, '静态门禁或任务规格列数不合格');
+assert(scoreAnswerLeak.pass && scoreAnswerLeak.hits.length === 0 && currentScoreLeakHits.length === 0, '候选人评分表含有样本答案');
 
 const cleanRuns = [];
 for (const label of ['Q10089 第一次 空目录', 'Q10089 第二次 中文 空格目录']) {
@@ -206,7 +220,7 @@ const evidence = {
   git_commit_sha: process.env.GITHUB_SHA, workflow_run_id: process.env.GITHUB_RUN_ID,
   runner: { os: process.env.RUNNER_OS, arch: process.env.RUNNER_ARCH, image_os: process.env.ImageOS, image_version: process.env.ImageVersion, node: process.version, powershell_hosted_workflow: true },
   software: { node: process.version }, attachment_sha256: attachmentSha256,
-  workbook_checks: { answer_sheet_names: workbookSheets(path.join(artifactRoot, '关键标准答案.xlsx')), specification_sheet_names: ['任务规格转化'] },
+  workbook_checks: { answer_sheet_names: workbookSheets(path.join(artifactRoot, '关键标准答案.xlsx')), specification_sheet_names: ['任务规格转化'], task_spec_column_count: staticReview.task_spec_column_count, candidate_score_answer_leak_hits: currentScoreLeakHits.length },
   platform_audit: { linux_executables: executableScan, linux_executables_executed: false, no_wsl_required: true, no_linux_container_required: true, no_posix_shell_required: true, cross_platform_paths: true },
   clean_runs: cleanRuns,
   crlf_input: { file: 'data/delivery_log.csv', exit_code: 0, semantic_digest: crlfDigest, reference_match: true },

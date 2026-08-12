@@ -6,4 +6,4 @@
 
 按bounce_policy.json的状态前缀区分永久退信与暂时退信。永久退信生成recipient或domain范围的新增抑制项，已有同范围、同值、同原因的记录不重复输出。暂时退信以X-Received-At为起点计算计划时间，下一次尝试号在原attempt_no上加1。domain_summary.csv从有效退信、实际新增抑制项和重投计划汇总，不另设人工统计口径。
 
-交付src/parse_bounces.mjs，以及reports目录下的parsed_bounces.csv、suppression_updates.csv、retry_plan.csv、bounce_exceptions.csv和domain_summary.csv。CSV表头与输入说明约定一致，业务行按主键稳定排列。在input_data目录执行npm run process:bounces应能重新生成全部交付物，输入邮件、发送记录、现有抑制名单和策略文件保持不变。
+交付src/parse_bounces.mjs，以及reports目录下的parsed_bounces.csv、suppression_updates.csv、retry_plan.csv、bounce_exceptions.csv和domain_summary.csv。CSV表头与输入说明约定一致，业务行按主键稳定排列。在input_data目录执行npm run process:bounces，交付结果应与邮件、发送记录和策略文件相符。
