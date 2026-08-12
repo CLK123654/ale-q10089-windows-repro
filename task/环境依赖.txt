@@ -1,3 +1,5 @@
-这批邮件材料可在64位Windows11原生环境、macOS或Linux处理。主软件为Node.js24LTS，运行时负责MIME分段、字符解码、CSV关联、UTC时间计算和交付生成；PowerShell、Windows终端或系统终端只负责解压、进入input_data并执行npm run process:bounces。实现只使用Node.js内置模块，不安装第三方npm包。
+操作系统：Windows11、macOS或主流64位Linux。
 
-Node.js安装阶段可以联网，正式处理不连接SMTP或其它外部系统。输入均为脱敏演练材料，不需要业务账号或密钥。执行账户需要读取mail、data、rules和starter，并能在input_data下创建output。普通开发电脑的CPU与内存即可完成任务，无需GPU，磁盘只需容纳邮件样本和报表；入口应设置有限超时，若持续数分钟仍未返回，应检查MIME边界和输入读取。主要运行风险来自折行头、base64与quoted-printable解码以及包含逗号的CSV字段。
+主软件为Node.js20或更高版本，用于完成MIME分段、字符解码、CSV关联和UTC时间计算。代码仅使用Node.js内置模块，无需安装第三方npm包。PowerShell、Windows终端或系统终端可用于解压和执行npm run process:bounces。
+
+适合当前邮件批次的普通开发电脑CPU与内存即可完成处理，无需GPU。磁盘需容纳Node.js、邮件样本和五份报表。执行账户需能读取mail、data、rules和starter，并能在input_data下创建output。任务在本地完成，不连接SMTP或其他外部系统。入口需设置有限超时，覆盖本题批次处理并避免异常无限等待。

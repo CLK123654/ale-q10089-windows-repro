@@ -1,7 +1,5 @@
 # 邮件退信处置任务
 
-本仓库保存QID10089的最终任务材料和独立Windows运行入口。artifacts目录包含四个最终附件，task目录包含题面正文，verification目录负责从附件准备干净环境并运行Node.js退信处理链。
+本仓库保存邮件退信解析与投递处置任务。task目录是任务正文，artifacts目录包含输入数据、标准交付和两份工作簿。
 
-GitHub工作流在windows-2025上使用Node.js24。验证器在两个带中文和空格的干净目录中，从最终输入包与完成版模块生成全部交付物，并按业务主键与Reference比较。它还会测试CSV的CRLF行尾、调整system重投延迟并移除策略文件，以核对输入变化和错误处理。
-
-最终证据记录当前提交、工作流运行编号、Windows托管机信息、Node.js版本、四附件SHA-256、退出码与结构化结果。每次运行都会重新生成verification/evidence/windows-verification.json。
+答题入口、软件条件和交付路径以task目录中的Prompt与环境依赖为准。
