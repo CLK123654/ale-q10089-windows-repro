@@ -1,4 +1,4 @@
-操作系统：Windows11、macOS或主流64位Linux。
+操作系统： Windows11、macOS或主流64位Linux。
 
 主软件为Node.js20或更高版本，用于完成MIME分段、字符解码、CSV关联和UTC时间计算。代码仅使用Node.js内置模块，无需安装第三方npm包。PowerShell、Windows终端或系统终端可用于解压和执行npm run process:bounces。
 
