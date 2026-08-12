@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "skill": "humanizer-zh",
+  "result": "PASS",
+  "reviewed_scopes": [
+    "任务名称",
+    "任务概要",
+    "任务prompt",
+    "关键动作",
+    "评分表",
+    "环境依赖",
+    "软件步骤",
+    "输入材料中的自然语言",
+    "Reference中的用户可见文字",
+    "关键标准答案工作簿全部自然语言",
+    "任务规格工作簿全部自然语言"
+  ],
+  "scores": {
+    "直接性": 10,
+    "节奏": 9,
+    "信任度": 10,
+    "真实性": 9,
+    "精炼度": 9,
+    "total": 47
+  },
+  "minimum_total": 45,
+  "notes": [
+    "题面从退信率异常和下一批发送决策切入，直接说明投递运营与发送策略负责人如何使用结果。",
+    "重复键、状态分类、抑制范围和重投延迟都来自可见策略文件，退信时间与发送身份来自邮件和发送记录。",
+    "评分不再抄录样本ID、完整结果集合、固定统计或逐样本计划时间，只说明输入规则、业务主键、字段、容差和复算关系。",
+    "句子长短随邮件解析、策略裁决和交付信息变化，避免宣传语、机械三段式、否定式排比及模糊归因。"
+  ],
+  "online_ai_detection_used_as_conclusion": false,
+  "reviewed_artifacts_sha256": {
+    "任务名称.txt": "ee40ccd1a7db3eec414d1ea668c6b40d689f291ea181b7481714a575f696c7be",
+    "任务概要.txt": "515def8533407442080d5390dcc2150d095b76cc1987493b211c12d4f55c8862",
+    "任务prompt.txt": "ad02960d06a3eedf2522cec688895102b59ae52adb20e04039f19643748ab710",
+    "关键动作.txt": "9d517f4fccaec98541efaa487e4eec767da68fe7a3d8c7c4d51c03d735bc22e4",
+    "评分表.txt": "fd20cf5bc9b07a8185acefd0db5489103890032663315768b9400141cb7021f2",
+    "环境依赖.txt": "1c7a6c609c93b56341145d0c89a038505a7c953cdcc117c8ec862ff3d04e2a0a",
+    "相关专业软件的关键步骤.txt": "eb7c4c9bcfcbedc6582a2ffdf2c43b1e1a69cb4ae1e370adb2eeb591c48c59fa",
+    "task_fields.json": "6d1381bed3ee8687c35fbc9552e56e5761a093f7ca29a5ca6ce653784930fdaf",
+    "ALE-专家数据作业表.csv": "66916ba664106abf0d2bd810ded0cc38cdf7af14700026dec49b04b89ed9d521",
+    "输入数据包.zip": "cde5a79bd871c81bdff6d5a06fc1728f7b72276f54ad5e48fcd8fde7c4624667",
+    "reference.zip": "e879530a9c6f9133b0af43d80efd8d1bbcf3e641ab66ad6441cec346bfe265f5",
+    "关键标准答案.xlsx": "6dc82cc0490521fccf47735cefc6beab344db032cbe340fd0d7b9ca7cf1db7d1",
+    "任务规格转化.xlsx": "c7092e9398e53e6708b9dcd1a7d1b31d28c50d8db4e800403ee0c102dc72769f"
+  }
+}

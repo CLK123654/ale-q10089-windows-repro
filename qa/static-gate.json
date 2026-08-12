@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "result": "PASS",
+  "scanned_sources": 227,
+  "violations": [],
+  "answer_sheets": [
+    "交付物答案清单",
+    "固定字段答案",
+    "固定集合答案",
+    "固定数值答案",
+    "允许变体答案"
+  ],
+  "specification_sheets": [
+    "任务规格转化"
+  ],
+  "task_spec_row_count": 19,
+  "task_spec_column_count": 2,
+  "task_asset_id": "node_dsn_delivery_disposition",
+  "task_asset_id_valid": true,
+  "forbidden_spec_labels": [],
+  "declared_delivery_paths": [
+    "reports/bounce_exceptions.csv",
+    "reports/domain_summary.csv",
+    "reports/parsed_bounces.csv",
+    "reports/retry_plan.csv",
+    "reports/suppression_updates.csv",
+    "src/parse_bounces.mjs"
+  ],
+  "reference_paths": [
+    "reports/bounce_exceptions.csv",
+    "reports/domain_summary.csv",
+    "reports/parsed_bounces.csv",
+    "reports/retry_plan.csv",
+    "reports/suppression_updates.csv",
+    "src/parse_bounces.mjs"
+  ],
+  "business_inputs": [
+    "input_data/data/delivery_log.csv",
+    "input_data/data/existing_suppression.csv",
+    "input_data/rules/bounce_policy.json",
+    "input_data/mail"
+  ],
+  "business_inputs_present": true,
+  "candidate_score_answer_leak_hits": 0,
+  "online_ai_detector_used_as_conclusion": false
+}
