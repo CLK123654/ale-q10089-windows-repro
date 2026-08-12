@@ -1,4 +1,7 @@
+总分：100分
+
 检查项：交付入口与文件
+分值：12分
 标准答案：src/parse_bounces.mjs可由package.json中的process:bounces入口调用，reports目录包含parsed_bounces.csv、suppression_updates.csv、retry_plan.csv、bounce_exceptions.csv和domain_summary.csv。
 关键字段：run函数、Prompt声明的交付路径、Node.js进程退出码。
 容差：文件路径和扩展名不设容差；模块内部函数拆分可以不同。
@@ -10,6 +13,7 @@
 所属层级：L2软件 / 工具操作层
 
 检查项：MIME与DSN解析
+分值：15分
 标准答案：mail目录中的每封eml都按Content-Type声明的boundary拆分，dsn_id取自X-DSN-Id，其余退信字段取自message/delivery-status。缺少Status时保留已解析身份并按策略进入异常分流。
 关键字段：dsn_id、message_id、recipient、action、status_code、diagnostic_code、Content-Transfer-Encoding。
 容差：字段内容不设容差；MIME解析函数和中间对象名称可以不同。
@@ -21,6 +25,7 @@
 所属层级：L4数据清洗与质量控制层
 
 检查项：发送关联、重复裁决与异常分流
+分值：17分
 标准答案：退信先按message_id关联delivery_log.csv，再按bounce_policy.json中的duplicate_key裁决重复记录。无法关联、缺少必需字段或重复键命中的邮件进入异常分流，不参与后续处置。
 关键字段：dsn_id、message_id、recipient、status_code、reason、detail。
 容差：业务主键和reason不设容差；detail允许调整语序，但要保留关联主键、缺失字段或重复来源。
@@ -32,6 +37,7 @@
 所属层级：L5多源关联与字段一致性层
 
 检查项：永久退信与抑制增量
+分值：17分
 标准答案：永久退信依据status_rules匹配policy_reason和suppression_scope，value由recipient或domain取得，effective_at_utc取邮件X-Received-At。existing_suppression.csv中同范围、同值、同原因且生效的记录不再输出。
 关键字段：class、policy_reason、scope、value、source_dsn_id、effective_at_utc。
 容差：业务字段不设容差；CSV允许LF或CRLF行尾和必要引号。
@@ -43,6 +49,7 @@
 所属层级：L6领域计算与专业规则层
 
 检查项：暂时退信与重投计划
+分值：16分
 标准答案：暂时退信依据status_rules确定retry_tier和delay_seconds，scheduled_at_utc由X-Received-At加对应延迟得到，next_attempt_no等于发送记录中的attempt_no加1。
 关键字段：message_id、source_dsn_id、retry_tier、next_attempt_no、scheduled_at_utc。
 容差：UTC时间和尝试号不设容差；行序按message_id或source_dsn_id稳定排列均可。
@@ -54,6 +61,7 @@
 所属层级：L6领域计算与专业规则层
 
 检查项：域级处置汇总
+分值：10分
 标准答案：domain_summary.csv按有效退信的收件域分组，parsed_bounces、permanent_bounces和transient_bounces来自parsed_bounces.csv，suppression_updates与retry_rows分别从对应处置报告按来源退信回连后计数。
 关键字段：domain、parsed_bounces、permanent_bounces、transient_bounces、suppression_updates、retry_rows。
 容差：计数不设容差；行序按domain升序输出。
@@ -65,6 +73,7 @@
 所属层级：L9跨产物一致性与可追溯层
 
 检查项：跨报表业务追溯
+分值：13分
 标准答案：parsed_bounces.csv以dsn_id关联源邮件，以message_id关联delivery_log.csv；suppression_updates.csv、retry_plan.csv和bounce_exceptions.csv通过source_dsn_id或dsn_id回连处理结果，domain_summary.csv按domain复算。
 关键字段：dsn_id、message_id、source_dsn_id、domain及各CSV表头。
 容差：CSV允许必要引号及LF或CRLF行尾，业务主键与外键不设容差。

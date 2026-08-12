@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "change_type": "score_environment_text_only_change",
+  "result": "PASS",
+  "score_total": 100,
+  "item_scores": [
+    12,
+    15,
+    17,
+    17,
+    16,
+    10,
+    13
+  ],
+  "prompt_coverage_review": "PASS",
+  "rubric_semantics_changed": false,
+  "environment_coverage": [
+    "OS",
+    "主软件",
+    "代码执行依赖",
+    "CPU与GPU",
+    "磁盘",
+    "超时"
+  ],
+  "license_text_present": false,
+  "attachments_rebuilt": false,
+  "windows_rerun": false,
+  "online_write_performed": false,
+  "static_gate": "PASS",
+  "contract_score_environment_gate": "PASS",
+  "full_contract_legacy_issues_remain": false
+}
